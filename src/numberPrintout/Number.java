@@ -4,12 +4,14 @@ public class Number {
 	private int number;
 	private int length;
 	private String numberPrint;
+	StringBuilder str = new StringBuilder();
 	
 	public Number(int number) {
 		super();
 		this.number = number;
 		this.length = this.getLength();
 		this.numberPrint = "";
+		this.str.append(this.getNumber());
 	}
 	
 	
@@ -59,14 +61,16 @@ public class Number {
 	
 	
 	
-//	public void choosePrintout(){
-//		int num = this.getLength();
-//		
-//		if(num == 1)
-//			printSingleDigit();
-//		else if(num == 2){
-//			printDoubleDigit();
-//		}
+	public void choosePrintout(int num){
+		StringBuilder a = new StringBuilder();
+		a.append(num);
+		
+		if(a.length() == 1)
+			printSingleDigits(num);
+		else if(a.length() == 2){
+			printDoubleDigits(num);
+		}
+	}
 //		else if(num ==  3){
 //			printTripleDigit();
 //		}
@@ -90,21 +94,139 @@ public class Number {
 //	}
 	
 	public void handleOnes(){
-		StringBuilder str = new StringBuilder();
+		
 		StringBuilder strOutput = new StringBuilder();
-		str.append(this.getNumber());
+	
 		
 		if(str.charAt(0) == '1' && str.length() > 2){
 			strOutput.append("ett");
 			this.setNumberPrint(strOutput.toString());
-		}
-		else if(str.charAt(this.getLength()-1) == '1'){
+		}		else if(str.charAt(this.getLength()-1) == '1'){
 			strOutput.append("en");
 			System.out.println("asdf: " +strOutput);
 			this.setNumberPrint(strOutput.toString());
 		}
 		
 	}
+	
+	public void printSingleDigits(int num){
+		
+		switch(num){
+			case 0:
+				this.setNumberPrint("null");
+				break;
+			case 1:
+				this.setNumberPrint("en");
+				break;
+			case 2:
+				this.setNumberPrint("to");
+				break;
+			case 3:
+				this.setNumberPrint("tre");
+				break;
+			case 4:
+				this.setNumberPrint("fire");
+				break;
+			case 5:
+				this.setNumberPrint("fem");
+				break;
+			case 6:
+				this.setNumberPrint("seks");
+				break;
+			case 7:
+				this.setNumberPrint("sju");
+				break;
+			case 8:
+				this.setNumberPrint("åtte");
+				break;
+			case 9:
+				this.setNumberPrint("ni");
+				break;
+		}
+	}
+
+	public void printDoubleDigits(int num){
+//		if( num % 10 != 0|| (num == 10 ||num == 20 )){
+			switch(num){
+			case 10:
+				this.setNumberPrint("ti");
+				break;
+			case 11:
+				this.setNumberPrint("elleve");
+				break;
+			case 12:
+				this.setNumberPrint("tolv");
+				break;
+			case 13:
+				this.setNumberPrint("tretten");
+				break;
+			case 14:
+				this.setNumberPrint("fjorten");
+				break;
+			case 15:
+				this.setNumberPrint("femten");
+				break;
+			case 16:
+				this.setNumberPrint("seksten");
+				break;
+			case 17:
+				this.setNumberPrint("sytten");
+				break;
+			case 18:
+				this.setNumberPrint("atten");
+				break;
+			case 19:
+				this.setNumberPrint("nitten");
+				break;
+			case 20:
+				this.setNumberPrint("tjue");
+				break;
+			case 30:
+				this.setNumberPrint("tretti");
+				break;
+			case 40:
+				this.setNumberPrint("førti");
+				break;
+			case 50:
+				this.setNumberPrint("femti");
+				break;
+			case 60:
+				this.setNumberPrint("seks");
+				break;
+			case 70:
+				this.setNumberPrint("sytti");
+				break;
+			case 80:
+				this.setNumberPrint("åtti");
+				break;
+			case 90: 
+				this.setNumberPrint("nitti");
+				break;
+			}
+//		}else if (num % 10 == 0){
+//			System.out.println("her kom du");
+//			str.append(num);
+//			char firstNumber = str.charAt(0);
+//			
+//			System.out.println(firstNumber);
+//			String a = Character.toString(firstNumber);
+//			int b = Integer.parseInt(a);
+//			
+//			this.printSingleDigits(b);
+//			setNumberPrint("ti");
+	//			str.append("ti");
+	//			System.out.println("etter fix" +str);
+			
+			
+			
+//		}
+	}
+	
+	public void printTripleDigits(){
+		
+	}
+	
+	
 	
 //	> 1 >10 >100 >1000 >100 000 > 1 000 000 > 	
 	
