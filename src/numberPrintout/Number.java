@@ -4,7 +4,7 @@ public class Number {
 	private int number;
 	private int length;
 	private String numberPrint;
-	StringBuilder str = new StringBuilder();
+	private StringBuilder str = new StringBuilder();
 	
 	public Number(int number) {
 		super();
@@ -18,19 +18,19 @@ public class Number {
 	
 	@Override
 	public String toString() {
-		return "Number: " + number + " Length: " + length + " Written number: " + numberPrint;
+		return "Number: " + number + " Length: " + length + " Written number: " + handleOnes(numberPrint);
 	}
 
 	
 
 	public String getNumberPrint() {
-		return numberPrint.toString();
+		return numberPrint;
 	}
 
 
 
 	public void setNumberPrint(String numberPrint) {
-		this.numberPrint +=  numberPrint + " ";
+		this.numberPrint +=  numberPrint;
 	}
 
 
@@ -70,47 +70,61 @@ public class Number {
 		else if(a.length() == 2){
 			printDoubleDigits(num);
 		}
+	
+		else if(a.length() ==  3){
+			printTripleDigits(num);
+		}
+	
+		else if(a.length() ==  4){
+			printFourDigits(num);
+		}
 	}
-//		else if(num ==  3){
-//			printTripleDigit();
+//		else if(a.length() ==  5){
+//			printFiveDigits(num);
 //		}
-//		else if(num ==  4){
-//			printFourDigits();
+//		else if(a.length() ==  6){
+//			printSixDigits(num);
 //		}
-//		else if(num ==  5){
-//			printFiveDigits();
+//		else if(a.length() ==  7){
+//			printSevenDigits(num);
 //		}
-//		else if(num ==  6){
-//			printSixDigits();
-//		}
-//		else if(num ==  7){
-//			printSevenDigits();
-//		}
-//		else if(num > 7){
+//		else if(a.length() > 7){
 //			System.out.println("number too large");
 //			break;
 //		}
 //		
 //	}
 	
-	public void handleOnes(){
-		
-		StringBuilder strOutput = new StringBuilder();
+	public int getFirstDigit(){
+		return (int)str.charAt(0)-48;
+	}
 	
-		
-		if(str.charAt(0) == '1' && str.length() > 2){
-			strOutput.append("ett");
-			this.setNumberPrint(strOutput.toString());
-		}		else if(str.charAt(this.getLength()-1) == '1'){
-			strOutput.append("en");
-			System.out.println("asdf: " +strOutput);
-			this.setNumberPrint(strOutput.toString());
-		}
+	public int getXDigits(int digitAmount){
+		System.out.println(str.toString());
+		str.delete(0, str.length()-digitAmount);
+		System.out.println("parsed shit: "+ Integer.parseInt(str.toString()));
+		return Integer.parseInt(str.toString());
+	}
+	
+
+	
+	public String handleOnes(String numberPrint){
+		String numberFix = "";
+		numberFix = numberPrint;
+		if(this.getLength() > 1)
+			numberFix.replaceAll("null", "");
+		if(getFirstDigit() == 1){
+			numberFix = numberPrint.substring(0,2).replace("en","ett");
+			numberFix +=numberPrint.substring(3, numberPrint.length());
+		}else
+	
+			
+		return numberFix;
 		
 	}
 	
 	public void printSingleDigits(int num){
-		
+		System.out.println("print1digit");
 		switch(num){
 			case 0:
 				this.setNumberPrint("null");
@@ -142,11 +156,13 @@ public class Number {
 			case 9:
 				this.setNumberPrint("ni");
 				break;
+			default:
+				break;
 		}
 	}
 
 	public void printDoubleDigits(int num){
-//		if( num % 10 != 0|| (num == 10 ||num == 20 )){
+		if( num > 9 && num <20){
 			switch(num){
 			case 10:
 				this.setNumberPrint("ti");
@@ -178,51 +194,66 @@ public class Number {
 			case 19:
 				this.setNumberPrint("nitten");
 				break;
-			case 20:
-				this.setNumberPrint("tjue");
-				break;
-			case 30:
-				this.setNumberPrint("tretti");
-				break;
-			case 40:
-				this.setNumberPrint("førti");
-				break;
-			case 50:
-				this.setNumberPrint("femti");
-				break;
-			case 60:
-				this.setNumberPrint("seks");
-				break;
-			case 70:
-				this.setNumberPrint("sytti");
-				break;
-			case 80:
-				this.setNumberPrint("åtti");
-				break;
-			case 90: 
-				this.setNumberPrint("nitti");
-				break;
 			}
-//		}else if (num % 10 == 0){
-//			System.out.println("her kom du");
-//			str.append(num);
-//			char firstNumber = str.charAt(0);
-//			
-//			System.out.println(firstNumber);
-//			String a = Character.toString(firstNumber);
-//			int b = Integer.parseInt(a);
-//			
-//			this.printSingleDigits(b);
-//			setNumberPrint("ti");
-	//			str.append("ti");
-	//			System.out.println("etter fix" +str);
+		}
+		else if (num % 10 != 0){
+			int b = num - (num%10);
+			this.printDoubleDigits(b);
+			this.printSingleDigits(str.charAt(str.length()-1)-48);		
 			
-			
-			
-//		}
+		}else if ((num %10) == 0){
+			switch(num){
+				case 20:
+					this.setNumberPrint("tjue");
+					break;
+				case 30:
+					this.setNumberPrint("tretti");
+					break;
+				case 40:
+					this.setNumberPrint("førti");
+					break;
+				case 50:
+					this.setNumberPrint("femti");
+					break;
+				case 60:
+					this.setNumberPrint("seks");
+					break;
+				case 70:
+					this.setNumberPrint("sytti");
+					break;
+				case 80:
+					this.setNumberPrint("åtti");
+					break;
+				case 90: 
+					this.setNumberPrint("nitti");
+					break;
+				}
+		}
 	}
 	
-	public void printTripleDigits(){
+	public void printTripleDigits(int num){
+		System.out.println("print3digits");
+		//adds the first digit to the number (hundreds)
+		printSingleDigits(getFirstDigit());
+		
+		setNumberPrint("hundre og ");
+		//prints the remaining number
+		System.out.println("mordi");
+		System.out.println("2 digits: " +getXDigits(2));
+		printDoubleDigits(getXDigits(2));
+	}
+	
+	public void printFourDigits(int num){
+		System.out.println("print4digits");
+		System.out.println(str);
+		printSingleDigits(getFirstDigit());
+	
+		setNumberPrint("tusen ");
+		printTripleDigits(getXDigits(3));
+		System.out.println(str);
+		printDoubleDigits(getXDigits(2));
+		
+		
 		
 	}
 	
