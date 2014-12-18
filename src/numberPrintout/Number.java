@@ -116,9 +116,9 @@ public class Number {
 		if(getFirstDigit() == 1){
 			numberFix = numberPrint.substring(0,2).replace("en","ett");
 			numberFix +=numberPrint.substring(3, numberPrint.length());
-		}else
-	
-			
+		}else{
+		 System.out.println("mordi");
+		}
 		return numberFix;
 		
 	}
